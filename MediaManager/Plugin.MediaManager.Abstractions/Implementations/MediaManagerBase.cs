@@ -167,6 +167,7 @@ namespace Plugin.MediaManager.Abstractions.Implementations
                     break;
                 default:
                     await CurrentPlaybackManager.Pause();
+                    //await Play(_currentMediaFile);
                     break;
             }
         }

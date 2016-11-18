@@ -56,6 +56,7 @@ namespace MyMediaPlayer.Core.ViewModels
             MediaPlayer = CrossMediaManager.Current;
 
             Queue.Add(new MediaFile() {Type = MediaFileType.AudioUrl, Url = "http://www.montemagno.com/sample.mp3" });
+            //Queue.Add(new MediaFile() {Type = MediaFileType.VideoUrl, Url = "http://www.sample-videos.com/video/mp4/720/big_buck_bunny_720p_5mb.mp4" });
             MediaPlayer.BufferingChanged += MediaPlayer_BufferingChanged;
         }
 

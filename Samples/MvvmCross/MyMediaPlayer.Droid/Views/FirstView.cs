@@ -15,11 +15,14 @@ namespace MyMediaPlayer.Droid.Views
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.FirstView);
 
-            var exoPlayer =
+            var exoAudioPlayer =
                 new ExoPlayerAudioImplementation(
-                    ((MediaManagerImplementation) CrossMediaManager.Current).MediaSessionManager);
-            exoPlayer.RequestProperties = new Dictionary<string, string> { {"Test", "1234"} };
-            CrossMediaManager.Current.AudioPlayer = exoPlayer;
+                    ((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager);
+            //exoPlayer.RequestProperties = new Dictionary<string, string> { { "Test", "1234" } };
+            var exoVideoPlayer = new ExoPlayerVideoImplementation();
+
+            CrossMediaManager.Current.AudioPlayer = exoAudioPlayer;
+            CrossMediaManager.Current.VideoPlayer = exoVideoPlayer;
 
             //new AudioImp
         }
