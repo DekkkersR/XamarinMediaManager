@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Plugin.MediaManager.Abstractions.Enums;
 using Plugin.MediaManager.Abstractions.EventArguments;
-using Plugin.MediaManager.Abstractions.Implementations;
 
 namespace Plugin.MediaManager.Abstractions
 {
@@ -85,8 +85,8 @@ namespace Plugin.MediaManager.Abstractions
         Task Seek(TimeSpan position);
 
         /// <summary>
-        /// Gets or sets the request properties.
+        /// Gets or sets the request headers.
         /// </summary>
-        //Dictionary<string, string> RequestProperties { get; set; }
+        Dictionary<string, string> RequestHeaders { get; set; }
     }
 }

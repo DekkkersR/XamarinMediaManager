@@ -11,6 +11,7 @@ using Android.OS;
 using Android.Provider;
 using Android.Support.V4.Media.Session;
 using Plugin.MediaManager.Abstractions;
+using Plugin.MediaManager.Abstractions.Enums;
 using Plugin.MediaManager.Abstractions.EventArguments;
 using Plugin.MediaManager.Abstractions.Implementations;
 using Plugin.MediaManager.MediaSession;
@@ -62,7 +63,7 @@ namespace Plugin.MediaManager
 
         public abstract TimeSpan Buffered { get; }
 
-        public Dictionary<string, string> RequestProperties { get; set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> RequestHeaders { get; set; }
 
         public MediaPlayerStatus Status
         {
@@ -94,7 +95,12 @@ namespace Plugin.MediaManager
 
         public virtual async Task Play(IMediaFile mediaFile = null)
         {
-            if(!ValidateMediaFile(mediaFile) || CheckIfFileAlreadyIsPlaying(mediaFile).Result)
+            if(!ValidateMediaFile(mediaFile))
+                return;
+
+            bool alreadyPlaying = await CheckIfFileAlreadyIsPlaying(mediaFile);
+
+            if (alreadyPlaying)
                 return;
 
             CurrentFile = mediaFile;
@@ -162,7 +168,7 @@ namespace Plugin.MediaManager
             if (intent?.Action == null)
                 return;
 
-            SessionManager.HandleAction(intent.Action);
+            SessionManager?.HandleAction(intent?.Action);
         }
 
         /// <summary>

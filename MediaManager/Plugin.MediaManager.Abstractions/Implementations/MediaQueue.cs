@@ -6,6 +6,8 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading;
+using Plugin.MediaManager.Abstractions.Enums;
+using Plugin.MediaManager.Abstractions.EventArguments;
 
 namespace Plugin.MediaManager.Abstractions.Implementations
 {
@@ -90,14 +92,14 @@ namespace Plugin.MediaManager.Abstractions.Implementations
             }
         }
 
-        private RepeatType repeat;
+        private RepeatType repeat = RepeatType.None;
         public RepeatType Repeat
         {
             get
             {
                 return repeat;
             }
-            private set
+            set
             {
                 repeat = value;
                 OnPropertyChanged(nameof(Repeat));
@@ -269,9 +271,9 @@ namespace Plugin.MediaManager.Abstractions.Implementations
                 Index = _queue.IndexOf(item);
         }
 
-        public void ToggleRepeat(RepeatType repeatType)
+        public void ToggleRepeat()
         {
-            switch (repeatType)
+            switch (Repeat)
             {
                 case RepeatType.None:
                     Repeat = RepeatType.RepeatOne;
@@ -380,6 +382,9 @@ namespace Plugin.MediaManager.Abstractions.Implementations
         {
             var updateProperty = new Action(() =>
                 {
+                    if (_queue?.LastOrDefault() == Current)
+                        QueueEnded?.Invoke(this, new QueueEndedEventArgs());
+                
                     IMediaFile current = null;
                     if (Count - 1 >= Index && Index >= 0)
                     {
@@ -390,6 +395,7 @@ namespace Plugin.MediaManager.Abstractions.Implementations
                     {
                         _current = current;
                         OnPropertyChanged(nameof(Current));
+                        QueueMediaChanged?.Invoke(this, new QueueMediaChangedEventArgs(Current));
                     }
                 });
 

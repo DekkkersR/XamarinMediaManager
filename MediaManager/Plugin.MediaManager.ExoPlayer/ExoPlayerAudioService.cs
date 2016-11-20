@@ -26,6 +26,7 @@ using Plugin.MediaManager.Abstractions.EventArguments;
 using Plugin.MediaManager.Abstractions.Implementations;
 using Console = System.Console;
 using Object = Java.Lang.Object;
+using Plugin.MediaManager.Abstractions.Enums;
 
 namespace Plugin.MediaManager.ExoPlayer
 {
@@ -239,7 +240,7 @@ namespace Plugin.MediaManager.ExoPlayer
         {
             var bandwithMeter = new DefaultBandwidthMeter();
             var httpFactory = new DefaultHttpDataSourceFactory(ExoPlayerUtil.GetUserAgent(this, ApplicationInfo.Name), bandwithMeter);
-            var factory = new HttpSourceFactory(httpFactory, RequestProperties);
+            var factory = new HttpSourceFactory(httpFactory, RequestHeaders);
             var extractorFactory = new DefaultExtractorsFactory();
             var uri = Android.Net.Uri.Parse(url);
             return new ExtractorMediaSource(uri

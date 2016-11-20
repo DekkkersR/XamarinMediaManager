@@ -9,6 +9,7 @@ using Android.Support.V4.App;
 using Android.Support.V4.Content;
 using Android.Support.V4.Media.Session;
 using Plugin.MediaManager.Abstractions;
+using Plugin.MediaManager.Abstractions.Enums;
 using Plugin.MediaManager.Abstractions.Implementations;
 using NotificationCompat = Android.Support.V7.App.NotificationCompat;
 
@@ -108,7 +109,7 @@ namespace Plugin.MediaManager
             _builder.SetContentTitle(mediaFile?.Metadata?.Title ?? string.Empty);
             _builder.SetContentText(mediaFile?.Metadata?.Artist ?? string.Empty);
             _builder.SetContentInfo(mediaFile?.Metadata?.Album ?? string.Empty);
-            _builder.SetLargeIcon(mediaFile?.Metadata?.Cover as Bitmap);
+            _builder.SetLargeIcon(mediaFile?.Metadata?.AlbumArt as Bitmap);
         }
 
         private Android.Support.V4.App.NotificationCompat.Action GenerateActionCompat(int icon, string title, string intentAction)

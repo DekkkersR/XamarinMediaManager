@@ -8,6 +8,7 @@ using Android.Content;
 using Android.Support.V4.Media.Session;
 using Java.Lang;
 using Plugin.MediaManager.Abstractions;
+using Plugin.MediaManager.Abstractions.Enums;
 using Plugin.MediaManager.Abstractions.EventArguments;
 using Plugin.MediaManager.Abstractions.Implementations;
 using Plugin.MediaManager.MediaSession;
@@ -41,7 +42,7 @@ namespace Plugin.MediaManager
 
         public MediaSessionCompat.Callback AlternateRemoteCallback { get; set; }
 
-        public Dictionary<string, string> RequestProperties { get; set; }
+        public Dictionary<string, string> RequestHeaders { get; set; }
 
         private MediaPlayerStatus status;
         public virtual MediaPlayerStatus Status
@@ -178,7 +179,17 @@ namespace Plugin.MediaManager
 
         private void CancelPlayingHandler()
         {
-            if (_onPlayingCancellationSource.Token.CanBeCanceled)
+            bool canBeCancelled;
+            try
+            {
+                canBeCancelled = _onPlayingCancellationSource.Token.CanBeCanceled;
+            }
+            catch (ObjectDisposedException)
+            {
+                canBeCancelled = false;
+            }
+
+            if (canBeCancelled)
             {
                 _onPlayingCancellationSource.Cancel();
                 _onPlayingCancellationSource.Dispose();
@@ -211,7 +222,7 @@ namespace Plugin.MediaManager
         private TService GetMediaPlayerService()
         {
             var service = binder.GetMediaPlayerService<TService>();
-            service.RequestProperties = RequestProperties;
+            service.RequestHeaders = RequestHeaders;
             return service;
         }
 

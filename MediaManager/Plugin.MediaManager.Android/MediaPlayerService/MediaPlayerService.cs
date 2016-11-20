@@ -101,7 +101,11 @@ namespace Plugin.MediaManager
         public override async Task Play(IMediaFile mediaFile = null)
         {
             await base.Play(mediaFile);
-            _mediaPlayer.PrepareAsync();
+            try
+            {
+                _mediaPlayer.PrepareAsync();
+            }
+            catch (Java.Lang.IllegalStateException) { }
         }
 
         public override Task TogglePlayPause(bool forceToPlay)
@@ -157,7 +161,7 @@ namespace Plugin.MediaManager
                     _mediaPlayer.Reset();
                     try
                     {
-                        await _mediaPlayer.SetDataSourceAsync(ApplicationContext, Android.Net.Uri.Parse(uri), RequestProperties);
+                        await _mediaPlayer.SetDataSourceAsync(ApplicationContext, Android.Net.Uri.Parse(uri), RequestHeaders);
                     }
                     catch (Exception)
                     {
@@ -230,7 +234,7 @@ namespace Plugin.MediaManager
 
         public bool OnError(MediaPlayer mp, MediaError what, int extra)
         {
-            SessionManager.UpdatePlaybackState(PlaybackStateCompat.StateError, Position.Seconds);
+            SessionManager.UpdatePlaybackState(PlaybackStateCompat.StateError, Position.Seconds, Enum.GetName(typeof(MediaError),what));
             Stop();
             return true;
         }
@@ -274,7 +278,7 @@ namespace Plugin.MediaManager
         {
             _mediaPlayer?.Reset();
             Android.Net.Uri uri = Android.Net.Uri.Parse(CurrentFile.Url);
-            var dataSourceAsync = _mediaPlayer?.SetDataSourceAsync(ApplicationContext, uri, RequestProperties);
+            var dataSourceAsync = _mediaPlayer?.SetDataSourceAsync(ApplicationContext, uri, RequestHeaders);
             if (dataSourceAsync != null)
                 await dataSourceAsync;
         }

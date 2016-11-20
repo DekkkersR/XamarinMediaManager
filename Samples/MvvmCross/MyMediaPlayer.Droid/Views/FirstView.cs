@@ -18,7 +18,7 @@ namespace MyMediaPlayer.Droid.Views
             var exoAudioPlayer =
                 new ExoPlayerAudioImplementation(
                     ((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager);
-            exoAudioPlayer.RequestProperties = new Dictionary<string, string> { { "Test", "1234" } };
+            exoAudioPlayer.RequestHeaders = new Dictionary<string, string> { { "Test", "1234" } };
             var exoVideoPlayer = new ExoPlayerVideoImplementation();
 
             CrossMediaManager.Current.AudioPlayer = exoAudioPlayer;

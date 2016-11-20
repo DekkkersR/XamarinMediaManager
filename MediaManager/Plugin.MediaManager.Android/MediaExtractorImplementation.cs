@@ -6,6 +6,7 @@ using Android.Content.Res;
 using Android.Graphics;
 using Android.Media;
 using Plugin.MediaManager.Abstractions;
+using Plugin.MediaManager.Abstractions.Enums;
 using Plugin.MediaManager.Abstractions.Implementations;
 
 namespace Plugin.MediaManager
@@ -13,12 +14,12 @@ namespace Plugin.MediaManager
     public class MediaExtractorImplementation : IMediaExtractor
     {
         private readonly Resources _resources;
-        private readonly Dictionary<string,string> _requestProperties;
+        private readonly Dictionary<string,string> _requestHeaders;
 
-        public MediaExtractorImplementation(Resources resources, Dictionary<string, string> requestProperties)
+        public MediaExtractorImplementation(Resources resources, Dictionary<string, string> requestHeaders)
         {
             _resources = resources;
-            _requestProperties = requestProperties;
+            _requestHeaders = requestHeaders;
         }
 
         public async Task<IMediaFile> ExtractMediaInfo(IMediaFile mediaFile)
@@ -38,17 +39,17 @@ namespace Plugin.MediaManager
             
             if (imageByteArray == null)
             {
-                mediaFile.Metadata.Cover = GetTrackCover(mediaFile);
+                mediaFile.Metadata.AlbumArt = GetTrackCover(mediaFile);
             }
             else
             {
                 try
                 {
-                    mediaFile.Metadata.Cover = await BitmapFactory.DecodeByteArrayAsync(imageByteArray, 0, imageByteArray.Length);
+                    mediaFile.Metadata.AlbumArt = await BitmapFactory.DecodeByteArrayAsync(imageByteArray, 0, imageByteArray.Length);
                 }
                 catch (Java.Lang.OutOfMemoryError)
                 {
-                    mediaFile.Metadata.Cover = null;
+                    mediaFile.Metadata.AlbumArt = null;
                     throw;
                 }
             }
@@ -70,7 +71,7 @@ namespace Plugin.MediaManager
             switch (currentFile.Type)
             {
                 case MediaFileType.AudioUrl:
-                    await metaRetriever.SetDataSourceAsync(currentFile.Url, _requestProperties);
+                    await metaRetriever.SetDataSourceAsync(currentFile.Url, _requestHeaders);
                     break;
                 case MediaFileType.VideoUrl:
                     break;

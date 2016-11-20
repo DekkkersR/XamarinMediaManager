@@ -12,6 +12,7 @@ using Plugin.MediaManager.Abstractions.Implementations;
 using Plugin.MediaManager.ExoPlayer;
 using Plugin.MediaManager;
 using System.Collections.Generic;
+using Plugin.MediaManager.Abstractions.Enums;
 
 namespace MediaSample.Droid
 {
@@ -44,7 +45,7 @@ namespace MediaSample.Droid
             }
 
             var exoPlayer = new ExoPlayerAudioImplementation(((MediaManagerImplementation)CrossMediaManager.Current).MediaSessionManager);
-            exoPlayer.RequestProperties = new Dictionary<string, string> { { "Test", "1234" } };
+            exoPlayer.RequestHeaders = new Dictionary<string, string> { { "Test", "1234" } };
             CrossMediaManager.Current.AudioPlayer = exoPlayer;
             //new AudioPlayerImplementation<ExoPlayerAudioService>(MediaSessionManager));}
 
@@ -188,7 +189,7 @@ namespace MediaSample.Droid
                             title.Text = args.File.Metadata.Title;
                             subtitle.Text = args.File.Metadata.Artist;
                             var cover = FindViewById<ImageView>(Resource.Id.imageview_cover);
-                            cover.SetImageBitmap(args.File.Metadata.Cover as Bitmap);
+                            cover.SetImageBitmap(args.File.Metadata.AlbumArt as Bitmap);
                         }
                     }
                     catch (Exception ex)

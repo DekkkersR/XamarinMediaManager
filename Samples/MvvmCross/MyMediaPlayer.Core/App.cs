@@ -1,3 +1,5 @@
+using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 
 namespace MyMediaPlayer.Core
@@ -11,7 +13,13 @@ namespace MyMediaPlayer.Core
                 .AsInterfaces()
                 .RegisterAsLazySingleton();
 
-            RegisterAppStart<ViewModels.VideoViewModel>();
+            //RegisterAppStart<ViewModels.VideoViewModel>();
+            // Construct custom application start object
+            Mvx.ConstructAndRegisterSingleton<IMvxAppStart, AppStart>();
+            var appStart = Mvx.Resolve<IMvxAppStart>();
+
+            // register the appstart object
+            RegisterAppStart(appStart);
         }
     }
 }

@@ -3,6 +3,7 @@ using MvvmCross.Core.ViewModels;
 using Plugin.MediaManager;
 using Plugin.MediaManager.Abstractions;
 using Plugin.MediaManager.Abstractions.Implementations;
+using Plugin.MediaManager.Abstractions.Enums;
 
 namespace MyMediaPlayer.Core.ViewModels
 {
@@ -100,7 +101,7 @@ namespace MyMediaPlayer.Core.ViewModels
 
         public MediaPlayerStatus Status => MediaPlayer.Status;
 
-        public object Cover => MediaPlayer.MediaQueue.Current.Metadata.Cover;
+        public object Cover => MediaPlayer.MediaQueue.Current.Metadata.Album;
 
         public string PlayingText => $"Playing: {(Queue.Index + 1).ToString()} of {Queue.Count.ToString()}";
 

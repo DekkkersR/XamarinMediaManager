@@ -17,7 +17,7 @@ namespace MyMediaPlayer.Droid.Views
 
             
             var exoVideoPlayer = new ExoPlayerVideoImplementation();
-            exoVideoPlayer.RequestProperties = new Dictionary<string, string> { { "Test", "1234" } };
+            //exoVideoPlayer.RequestProperties = new Dictionary<string, string> { { "Test", "1234" } };
             CrossMediaManager.Current.VideoPlayer = exoVideoPlayer;
 
             //new AudioImp

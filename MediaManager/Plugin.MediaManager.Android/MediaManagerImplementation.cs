@@ -34,17 +34,23 @@ namespace Plugin.MediaManager
 
         public override IMediaExtractor MediaExtractor
         {
-            get { return _mediaExtraxtor ?? (_mediaExtraxtor = new MediaExtractorImplementation(Resources.System, RequestProperties)); }
+            get { return _mediaExtraxtor ?? (_mediaExtraxtor = new MediaExtractorImplementation(Resources.System, RequestHeaders)); }
             set { _mediaExtraxtor = value; }
         }
+
+        public override IVolumeManager VolumeManager { get; set; } = new VolumeManagerImplementation();
 
         public MediaSessionManager MediaSessionManager { get; set; } = new MediaSessionManager(Application.Context);
 
         private async void HandleNotificationActions(object sender, string action)
         {
-            if (action.Equals(MediaServiceBase.ActionPlay) || action.Equals(MediaServiceBase.ActionPause))
+            if (action.Equals(MediaServiceBase.ActionPlay))
             {
                 await PlayPause();
+            }
+            else if (action.Equals(MediaServiceBase.ActionPause))
+            {
+                await Pause();
             }
             else if (action.Equals(MediaServiceBase.ActionPrevious))
             {

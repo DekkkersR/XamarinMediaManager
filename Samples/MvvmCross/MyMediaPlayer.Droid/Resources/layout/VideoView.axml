@@ -15,10 +15,10 @@
             android:id="@+id/imageview_cover"
             android:layout_height="@dimen/fragment_player_picture_hight"
             android:scaleType="centerCrop"
-            android:layout_marginLeft="@dimen/element_margin_large"
-            android:layout_marginRight="@dimen/element_margin_large"
-            android:layout_marginBottom="@dimen/element_margin_large"
-            android:layout_marginTop="@dimen/element_margin_large"
+            android:layout_marginLeft="@dimen/margin_large"
+            android:layout_marginRight="@dimen/margin_large"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_large"
             android:background="@color/gray" />
     </RelativeLayout>
     <RelativeLayout
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout1"
                 android:layout_toLeftOf="@+id/toggleButton2"
-                android:layout_marginLeft="@dimen/element_margin_large">
+                android:layout_marginLeft="@dimen/margin_large">
                 <TextView
                     android:id="@+id/textview_title"
                     android:gravity="left"
@@ -75,10 +75,10 @@
                 android:layout_alignRight="@id/textview_title"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentRight="true"
-                android:paddingRight="@dimen/element_margin_large"
-                android:paddingLeft="@dimen/element_margin_small"
-                android:paddingBottom="@dimen/element_margin_small"
-                android:paddingTop="@dimen/element_margin_small" />
+                android:paddingRight="@dimen/margin_large"
+                android:paddingLeft="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
+                android:paddingTop="@dimen/margin_small" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -86,16 +86,16 @@
             android:id="@+id/relativeLayout3"
             android:layout_alignParentRight="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="@dimen/element_margin_tiny"
+            android:layout_marginTop="@dimen/margin_tiny"
             android:layout_below="@id/relativeLayout4"
-            android:layout_marginBottom="@dimen/element_margin_tiny">
+            android:layout_marginBottom="@dimen/margin_tiny">
             <TextView
                 android:text="Position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textview_position"
                 android:gravity="center"
-                android:layout_marginLeft="@dimen/element_margin_large"
+                android:layout_marginLeft="@dimen/margin_large"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true" />
             <SeekBar
@@ -116,7 +116,7 @@
                 android:layout_alignBottom="@+id/seekBar1"
                 android:layout_alignTop="@+id/seekBar1"
                 android:gravity="center"
-                android:layout_marginRight="@dimen/element_margin_large"
+                android:layout_marginRight="@dimen/margin_large"
                 android:textColor="@color/white"
                 android:layout_centerVertical="true" />
         </RelativeLayout>
@@ -134,7 +134,7 @@
                 android:textOff=" "
                 android:textOn=" "
                 android:layout_weight="2"
-                android:paddingLeft="@dimen/element_margin_tiny" />
+                android:paddingLeft="@dimen/margin_tiny" />
             <ImageButton
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
