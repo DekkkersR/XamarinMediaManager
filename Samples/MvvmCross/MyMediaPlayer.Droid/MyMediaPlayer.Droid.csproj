@@ -39,6 +39,10 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExoPlayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\Xam.Plugins.Android.ExoPlayer.2.0.4.1\lib\MonoAndroid\ExoPlayer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Mono.Android.Export" />
     <Reference Include="MvvmCross.Binding, Version=4.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\MvvmCross.Binding.4.4.0\lib\MonoAndroid\MvvmCross.Binding.dll</HintPath>
@@ -149,6 +153,7 @@
   <ItemGroup>
     <Compile Include="DebugTrace.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
+    <Compile Include="Player\MvxVideoPlayer.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Setup.cs" />

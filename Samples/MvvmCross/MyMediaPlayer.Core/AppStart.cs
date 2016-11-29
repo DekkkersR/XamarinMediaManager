@@ -8,7 +8,7 @@ namespace MyMediaPlayer.Core
     {
         public void Start(object hint = null)
         {
-            ShowViewModel<FirstViewModel>();
+            ShowViewModel<VideoViewModel>();
         }
     }
 }
